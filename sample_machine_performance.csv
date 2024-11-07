@@ -1,0 +1,11 @@
+ID Máquina,Máquina,Tiempo de Operación,Tiempo de Inactividad,Tipo de Error,Unidades Producidas,Fecha,Turno
+1,Prensa Hidráulica 2,7.02,0.87,Fallo en pieza de repuesto,89,2024-03-04,Noche
+2,Control de Calidad 3,4.12,1.69,Mantenimiento programado,179,2024-01-25,Tarde
+3,Prensa Hidráulica 4,3.6,1.95,Mantenimiento programado,148,2024-01-26,Noche
+4,Torno 1,3.63,1.6,Fallo en pieza de repuesto,178,2024-03-24,Mañana
+5,Prensa Hidráulica 3,8.58,2.33,Error en soldadura,52,2024-01-30,Noche
+6,Torno 4,1.16,0.99,Error en soldadura,114,2024-03-27,Mañana
+7,Prensa Hidráulica 5,1.85,1.16,Fallo en pieza de repuesto,156,2024-02-28,Noche
+8,Prensa Hidráulica 5,4.92,1.89,Parada inesperada,94,2024-02-29,Tarde
+9,Control de Calidad 3,9.59,0.73,Fallo en pieza de repuesto,197,2024-02-26,Tarde
+10,Control de Calidad 1,5.46,1.11,Error en soldadura,190,2024-02-03,Tarde
