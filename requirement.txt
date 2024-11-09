@@ -2,3 +2,5 @@ flet
 pandas
 matplotlib
 seaborn
+fpdf
+google.generativeai
