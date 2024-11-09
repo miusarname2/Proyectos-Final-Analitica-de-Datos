@@ -1,9 +1,10 @@
-# Proyectos Finales Analisis de Datos
-# Proyecto 1
+# Proyectos Finales Análisis de Datos
 
-# Proyecto 2
+## Proyecto 1
 
-## Guía para ejecutar el proyecto
+## Proyecto 2
+
+### Guía para ejecutar el proyecto
 
 Para ejecutar este proyecto, sigue estos pasos:
 
@@ -28,9 +29,9 @@ Para ejecutar este proyecto, sigue estos pasos:
       ```
 
 2. **Ejecución del Proyecto**:
-   El proyecto utiliza la librería `flet` para la interfaz gráfica, junto con `pandas`, `matplotlib` y `seaborn` para análisis de datos y visualización.
+   El proyecto utiliza la librería `flet` para la interfaz gráfica, junto con `pandas`, `matplotlib`, y `seaborn` para análisis de datos y visualización.
 
-   - Para ejecutar el proyecto, guarda el código Python que has proporcionado en un archivo, por ejemplo, `app.py`.
+   - Para ejecutar el proyecto, guarda el código Python en un archivo, por ejemplo, `app.py`.
    - Desde la terminal, en el mismo directorio donde está el archivo `app.py`, ejecuta el siguiente comando:
      ```bash
      python app.py
@@ -51,6 +52,8 @@ La herramienta permitirá a los usuarios cargar archivos CSV, seleccionar parám
 - **Flet**: Para la creación de interfaces gráficas interactivas.
 - **Pandas**: Para la manipulación y análisis de datos.
 - **Matplotlib y Seaborn**: Para la creación de gráficos y visualización de datos.
+- **FPDF**: Para la generación de reportes en formato PDF.
+- **Google Generative AI**: Para generar recomendaciones y mejoras en los procesos de producción.
 - **Tkinter**: Para la selección de archivos CSV de manera fácil y rápida.
 
 ---
@@ -76,4 +79,18 @@ Se generan gráficos de barras, líneas, pie y dispersión para mostrar:
 Utilizando los resultados del análisis, se proponen mejoras en los procesos de producción, como la implementación de mantenimiento preventivo o la optimización de los turnos de trabajo. También se identifican cuellos de botella y se estiman posibles ahorros de tiempo y costos.
 
 **6. Interactividad y Reportes:**
-El sistema ofrece una interfaz interactiva donde los usuarios pueden seleccionar parámetros específicos (como máquinas, turnos o fechas) para personalizar el análisis. Además, genera un informe automatizado que resume los hallazgos clave, estadísticas de eficiencia, tiempos de inactividad y recomendaciones de mejora.
+El sistema ofrece una interfaz interactiva donde los usuarios pueden seleccionar parámetros específicos (como máquinas, turnos o fechas) para personalizar el análisis. Además, genera un informe automatizado en PDF que resume los hallazgos clave, estadísticas de eficiencia, tiempos de inactividad y recomendaciones de mejora.
+
+---
+
+### Dependencias
+
+Las dependencias necesarias para este proyecto están listadas en `requirements.txt` e incluyen:
+
+- **flet**
+- **pandas**
+- **matplotlib**
+- **seaborn**
+- **fpdf**
+- **google.generativeai**
+
