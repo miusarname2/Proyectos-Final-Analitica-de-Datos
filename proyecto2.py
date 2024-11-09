@@ -1,10 +1,12 @@
 import flet as ft
 import pandas as pd
-import datetime
+from datetime import datetime
 import matplotlib.pyplot as plt
 import seaborn as sns
 import tkinter as tk
 from tkinter import filedialog
+import google.generativeai as genai
+from fpdf import FPDF
 from flet import Text, Column, Row, Dropdown, ElevatedButton
 
 class DataAnalysisApp:
@@ -98,6 +100,7 @@ class DataAnalysisApp:
         plt.figure(figsize=(10, 6))
         sns.barplot(x="Maquina", y="Unidades Producidas", data=filtered_df)
         plt.title(f"Comparación de Unidades Producidas entre máquinas similares a '{prefix}'")
+        plt.savefig('plot1.png', format='png', dpi=300)
         plt.show()
 
         # Gráfica de pie: Distribución de tipos de errores
@@ -106,13 +109,33 @@ class DataAnalysisApp:
         error_counts.plot.pie(autopct='%1.1f%%')
         plt.title(f"Distribución de Tipos de Errores en máquinas '{prefix}'")
         plt.ylabel('')
+        plt.savefig('plot2.png', format='png', dpi=300)
         plt.show()
 
         # Diagrama de dispersión: Tiempo de inactividad vs Unidades producidas
         plt.figure(figsize=(10, 6))
         sns.scatterplot(x="Tiempo de Inactividad", y="Unidades Producidas", data=filtered_df, hue="Maquina")
         plt.title(f"Relación entre Tiempo de Inactividad y Unidades Producidas en máquinas '{prefix}'")
+        plt.savefig('plot3.png', format='png', dpi=300)
         plt.show()
+
+    def save_report_to_pdf(self, report, filename="reporte.pdf"):
+            # Crear el PDF
+            pdf = FPDF()
+            pdf.set_auto_page_break(auto=True, margin=15)
+            pdf.add_page()
+
+            # Configurar la fuente
+            pdf.set_font("Arial", size=12)
+
+            # Agregar título
+            pdf.cell(200, 10, txt="Informe de Rendimiento de Máquinas", ln=True, align='C')
+
+            # Agregar el contenido del informe
+            pdf.multi_cell(0, 10, txt=report)
+
+            # Guardar el PDF en un archivo
+            pdf.output(filename)
 
     def generate_report(self, e, machine, shift, start_date, end_date):
         filtered_df = self.df
@@ -126,7 +149,7 @@ class DataAnalysisApp:
                 (filtered_df['Fecha'] >= start_date) & (filtered_df['Fecha'] <= end_date)
             ]
         
-        # Generar informe de rendimiento
+        # Generación del informe
         total_production = filtered_df["Unidades Producidas"].sum()
         avg_operating_time = filtered_df["Tiempo de Operación"].mean()
         avg_downtime = filtered_df["Tiempo de Inactividad"].mean()
@@ -144,13 +167,29 @@ class DataAnalysisApp:
 
         return report
     
-    def handleGenerateReport(self, e, machine, shift, start_date, end_date,page):
+    def handleGenerateReport(self, e, machine, shift, start_date, end_date, page):
         report = self.generate_report(e, machine, shift, start_date, end_date)
+        
+        # Configuración de la API para generación de contenido
+        genai.configure(api_key="AIzaSyAFOX2u2G6441nEen-0cRmQ54uWBpdV-WE")
+        model = genai.GenerativeModel("gemini-1.5-flash")
+        nowDatetime = datetime.now()
+        # Generar contenido con la API
+        response = model.generate_content(f"Mejora este reporte para que sea un poco más largo y explicativo sobre lo que se debe hacer Total de unidades producidas:'{report}',damelo en formato ascii, no en forma md, es decir quiero que quietes cosas como '**' o como '** texto **' , en la  [Fecha del reporte],pon esta fecha {nowDatetime},evidentemente en un formato correcto,por ejemplo de esta fecha:' 2024-11-09 11:59:24.315402', el formato corrector seria '09 de Noviembre del 2024'")
+        
+        # Obtener el texto generado correctamente
+        generated_report = response.text  # O ajusta según el atributo correcto del objeto response
+        
+        # Guardar el informe como PDF
+        self.save_report_to_pdf(generated_report)
+
+        # Mostrar un mensaje de confirmación
         dlg = ft.AlertDialog(
-            title=ft.Text('Reporte General.'),
-            content=ft.Text(report),
+            title=ft.Text('Reporte Generado'),
+            content=ft.Text('El reporte ha sido guardado como un archivo PDF.'),
         )
         page.open(dlg)
+
 
 
 app = DataAnalysisApp()
